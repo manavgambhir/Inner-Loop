@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "792954538486",
+    "project_id": "innerloop-eb2f2",
+    "storage_bucket": "innerloop-eb2f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792954538486:android:76a8a071553127faeddfd7",
+        "android_client_info": {
+          "package_name": "com.example.innerloop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAcKT3DHnqXzl0mPIZNC91fDm7Rtf2yO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
