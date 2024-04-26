@@ -1,5 +1,6 @@
 package com.example.innerloop.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -46,9 +47,20 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
     val user by userPostsViewModel.user.observeAsState(null)
     val context = LocalContext.current
 
+    var currentUserId = ""
+    if(FirebaseAuth.getInstance().currentUser != null){
+        currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
+    }
+
+    val followerList by userPostsViewModel.followerList.observeAsState(null)
+    val followingList by userPostsViewModel.followingList.observeAsState(null)
+
 
     userPostsViewModel.fetchPosts(uid)
     userPostsViewModel.fetchUser(uid)
+
+    userPostsViewModel.getFollowers(uid)
+    userPostsViewModel.getFollowing(uid)
 
     LaunchedEffect(firebaseUser) {
         if(firebaseUser==null){
@@ -62,7 +74,7 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
     LazyColumn() {
         item {
             ConstraintLayout(modifier = Modifier.padding(16.dp)) {
-                val (name,userName,bio,pfp,logoutBtn,followers,following) = createRefs()
+                val (name,userName,bio,pfp,followBtn,followers,following,unfollowBtn) = createRefs()
 
                 Text(text = user!!.name, style = TextStyle(
                     fontWeight = FontWeight.Bold,
@@ -80,7 +92,8 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
                     start.linkTo(parent.start)
                 })
 
-                Text(text = user!!.bio, modifier = Modifier.fillMaxWidth()
+                Text(text = user!!.bio, modifier = Modifier
+                    .fillMaxWidth()
                     .constrainAs(bio) {
                         top.linkTo(userName.bottom, margin = 8.dp)
                         start.linkTo(parent.start)
@@ -98,33 +111,51 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
                     contentScale = ContentScale.Crop
                 )
 
-                Text(text = "10 Followers", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp) ,modifier = Modifier.constrainAs(followers){
+                Text(text = "${followerList?.size} Followers", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp) ,modifier = Modifier.constrainAs(followers){
                     top.linkTo(bio.bottom, margin = 12.dp)
                     start.linkTo(parent.start)
                 })
 
-                Text(text = "8 Following", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp), modifier = Modifier.constrainAs(following){
+                Text(text = "${followingList?.size} Following", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp), modifier = Modifier.constrainAs(following){
                     top.linkTo(bio.bottom, margin = 12.dp)
                     start.linkTo(followers.end, margin = 10.dp)
                 })
 
                 ElevatedButton(onClick = {
-                    //TODO
+                    if(FirebaseAuth.getInstance().currentUser!=null){
+                        userPostsViewModel.followUsers(uid,currentUserId)
+                    }
                 },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-                    modifier = Modifier.constrainAs(logoutBtn){
+                    modifier = Modifier.constrainAs(followBtn){
                         top.linkTo(followers.bottom, margin = 15.dp)
                         start.linkTo(parent.start)
                     }
                 ) {
-                    Text(text = "Follow", fontSize = 16.sp)
+                    Text(text = if(followerList!=null && followerList!!.isNotEmpty() && followerList?.contains(currentUserId) == true){
+                        "Following"
+                    } else {
+                        "Follow"
+                    }, fontSize = 16.sp)
+                }
+
+                if(followerList?.contains(currentUserId) == true){
+                    ElevatedButton(onClick = { /*TODO*/ },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black),
+                        border = BorderStroke(2.dp, Color.Black),
+                        modifier = Modifier.constrainAs(unfollowBtn){
+                        top.linkTo(followers.bottom, margin = 15.dp)
+                        start.linkTo(followBtn.end, margin = 13.dp)
+                    }) {
+                        Text(text = "Unfollow", fontSize = 16.sp)
+                    }
                 }
 
             }
         }
 
         if(posts!=null && user!=null) {
-            items(posts ?: emptyList()) { post ->
+            items(posts!!.asReversed()) { post ->
                 PostItem(
                     postModel = post,
                     userModel = user!!,

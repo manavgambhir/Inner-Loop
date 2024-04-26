@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.util.UUID
@@ -64,13 +65,17 @@ class authViewModel: ViewModel() {
 
     private fun saveData(email: String, password: String, name: String, userName: String, downloadedUrl: String, bio: String, uid: String?, context:Context){
         val userData = UserModel(email,password,name,userName,downloadedUrl,bio,uid!!)
-//        Log.d("UserData: ",userData.toString())
         userRef.child(uid).setValue(userData)
             .addOnSuccessListener {
                 SharedPref.storeUserData(email,name,userName,downloadedUrl,bio, context)
-            }.addOnFailureListener{
+            }.addOnFailureListener{}
 
-            }
+        val firestoreDb = Firebase.firestore
+        val followersRef = firestoreDb.collection("followers").document(uid)
+        val followingRef = firestoreDb.collection("following").document(uid)
+
+        followersRef.set(mapOf("followerIds" to listOf<String>()))
+        followingRef.set(mapOf("followingIds" to listOf<String>()))
     }
 
     fun login(email: String, password: String, context: Context){

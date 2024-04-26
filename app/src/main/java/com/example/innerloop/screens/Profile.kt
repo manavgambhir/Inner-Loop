@@ -1,5 +1,6 @@
 package com.example.innerloop.screens
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -50,7 +51,22 @@ fun Profile(navController: NavHostController) {
     val context = LocalContext.current
     val user = UserModel(name = SharedPref.getName(context)!!, userName = SharedPref.getUserName(context)!!, downloadedUrl = SharedPref.getImageUrl(context)!!)
 
-    userPostsViewModel.fetchPosts(FirebaseAuth.getInstance().currentUser!!.uid)
+    var currentUserId = ""
+    if(FirebaseAuth.getInstance().currentUser != null){
+        currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
+    }
+
+    if(firebaseUser!=null) {
+        userPostsViewModel.fetchPosts(firebaseUser!!.uid)
+    }
+
+    val followerList by userPostsViewModel.followerList.observeAsState(null)
+    val followingList by userPostsViewModel.followingList.observeAsState(null)
+
+    if(currentUserId!=""){
+        userPostsViewModel.getFollowers(currentUserId)
+        userPostsViewModel.getFollowing(currentUserId)
+    }
 
     LaunchedEffect(firebaseUser) {
         if(firebaseUser==null){
@@ -100,33 +116,40 @@ fun Profile(navController: NavHostController) {
                     contentScale = ContentScale.Crop
                 )
 
-                Text(text = "10 Followers", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp) ,modifier = Modifier.constrainAs(followers){
+                Text(text = "${followerList?.size} Followers", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp) ,modifier = Modifier.constrainAs(followers){
                     top.linkTo(bio.bottom, margin = 12.dp)
                     start.linkTo(parent.start)
                 })
 
-                Text(text = "8 Following", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp), modifier = Modifier.constrainAs(following){
+                Text(text = "${followingList?.size} Following", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp), modifier = Modifier.constrainAs(following){
                     top.linkTo(bio.bottom, margin = 12.dp)
                     start.linkTo(followers.end, margin = 10.dp)
                 })
 
                 ElevatedButton(onClick = {
                     authViewModel.logout()
+
                 },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
                     modifier = Modifier.constrainAs(logoutBtn){
                         top.linkTo(followers.bottom, margin = 15.dp)
                         start.linkTo(parent.start)
-                    }
-                ) {
+                    }) {
                     Text(text = "Logout", fontSize = 16.sp)
                 }
 
             }
         }
 
-        items(posts?: emptyList()){post->
-            PostItem(postModel = post, userModel = user, navController = navController, userId = FirebaseAuth.getInstance().currentUser!!.uid)
+        items(posts?.asReversed() ?: emptyList()){ post->
+            if(firebaseUser!=null) {
+                PostItem(
+                    postModel = post,
+                    userModel = user,
+                    navController = navController,
+                    userId = FirebaseAuth.getInstance().currentUser!!.uid
+                )
+            }
         }
     }
 }

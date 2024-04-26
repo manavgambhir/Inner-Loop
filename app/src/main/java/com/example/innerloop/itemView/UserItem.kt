@@ -74,6 +74,6 @@ fun UserItem(userModel: UserModel, navController: NavHostController) {
 
 @Preview(showBackground = true)
 @Composable
-fun searchItemView() {
+fun SearchItemView() {
 //    UserItem()
 }
