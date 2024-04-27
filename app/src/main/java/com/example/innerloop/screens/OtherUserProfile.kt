@@ -140,7 +140,9 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
                 }
 
                 if(followerList?.contains(currentUserId) == true){
-                    ElevatedButton(onClick = { /*TODO*/ },
+                    ElevatedButton(onClick = {
+                        //TODO: Unfollow Functionality
+                    },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black),
                         border = BorderStroke(2.dp, Color.Black),
                         modifier = Modifier.constrainAs(unfollowBtn){

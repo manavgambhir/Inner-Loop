@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.innerloop.models.PostModel
 import com.example.innerloop.models.UserModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -29,12 +30,15 @@ class SearchViewModel: ViewModel() {
     }
 
     private fun fetchUsers(onResult: (List<UserModel>) -> Unit) {
+        val currentUserId = FirebaseAuth.getInstance().currentUser!!.uid
         userRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val res = mutableListOf<UserModel>()
                 for(userSnapshot in snapshot.children){
                     val user = userSnapshot.getValue(UserModel::class.java)
-                    res.add(user!!)
+                    if(user?.uid!=currentUserId) {
+                        res.add(user!!)
+                    }
                 }
                 onResult(res)
             }
