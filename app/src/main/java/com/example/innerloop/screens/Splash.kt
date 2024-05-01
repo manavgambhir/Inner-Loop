@@ -26,11 +26,11 @@ fun Splash(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(painter = painterResource(
-            id = R.drawable.logo), 
+            id = R.drawable.inner_ic),
             contentDescription = null, 
             modifier = Modifier.size(150.dp)
         )
-        Text(text = "Made By Manav",Modifier.padding(5.dp))
+        Text(text = "Made By Manav")
     }
 
     LaunchedEffect(true) {
