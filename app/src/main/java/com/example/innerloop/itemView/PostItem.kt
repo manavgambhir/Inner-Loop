@@ -64,7 +64,7 @@ fun PostItem(postModel:PostModel,userModel: UserModel,navController: NavHostCont
                 val painter = rememberAsyncImagePainter(model = userModel.downloadedUrl)
                 if(painter.state is AsyncImagePainter.State.Loading){
                     CircularProgressIndicator(modifier = Modifier
-                        .size(25.dp).align(Alignment.Center))
+                        .size(25.dp).align(Alignment.Center), strokeWidth = 2.dp)
                 }
 
                 Image(
@@ -105,12 +105,20 @@ fun PostItem(postModel:PostModel,userModel: UserModel,navController: NavHostCont
                     .height(220.dp)
                     .fillMaxWidth()
                 ){
-                    Image(painter = rememberAsyncImagePainter(model = postModel.imageUrl), contentDescription = "attachCam",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight(),
-                        contentScale = ContentScale.Crop
-                    )
+                    Box(modifier = Modifier.fillMaxSize()){
+                        val painter = rememberAsyncImagePainter(model = postModel.imageUrl)
+                        if (painter.state is AsyncImagePainter.State.Loading) {
+                            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center),
+                                strokeWidth = 3.dp
+                        )}
+
+                        Image(painter = rememberAsyncImagePainter(model = postModel.imageUrl), contentDescription = "attachCam",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
             }
 

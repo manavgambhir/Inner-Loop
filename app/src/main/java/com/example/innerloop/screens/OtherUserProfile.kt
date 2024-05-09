@@ -3,6 +3,7 @@ package com.example.innerloop.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -10,12 +11,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -28,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import com.example.innerloop.itemView.PostItem
 import com.example.innerloop.models.UserModel
@@ -100,16 +104,31 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
                     }
                     .padding(end = 90.dp))
 
-                Image(painter = rememberAsyncImagePainter(model = user!!.downloadedUrl), contentDescription = "pfp",
-                    modifier = Modifier
-                        .constrainAs(pfp) {
-                            end.linkTo(parent.end)
-                            top.linkTo(parent.top, margin = 10.dp)
-                        }
-                        .size(100.dp)
-                        .clip(CircleShape),
-                    contentScale = ContentScale.Crop
-                )
+                Box(modifier = Modifier
+                    .constrainAs(pfp) {
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top, margin = 10.dp)
+                    }.size(100.dp).clip(CircleShape)){
+                    val painter = rememberAsyncImagePainter(model = user!!.downloadedUrl)
+                    if(painter.state is AsyncImagePainter.State.Loading){
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center),
+                            strokeWidth = 3.dp)
+                    }
+
+                    Image(painter = painter, contentDescription = "pfp",
+                        Modifier.size(100.dp),
+                        contentScale = ContentScale.Crop)
+                }
+//                Image(painter = rememberAsyncImagePainter(model = user!!.downloadedUrl), contentDescription = "pfp",
+//                    modifier = Modifier
+//                        .constrainAs(pfp) {
+//                            end.linkTo(parent.end)
+//                            top.linkTo(parent.top, margin = 10.dp)
+//                        }
+//                        .size(100.dp)
+//                        .clip(CircleShape),
+//                    contentScale = ContentScale.Crop
+//                )
 
                 Text(text = "${followerList?.size} Followers", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp) ,modifier = Modifier.constrainAs(followers){
                     top.linkTo(bio.bottom, margin = 12.dp)
