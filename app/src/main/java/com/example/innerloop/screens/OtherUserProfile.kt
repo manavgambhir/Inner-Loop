@@ -49,7 +49,6 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
     val userPostsViewModel: UserPostsViewModel = viewModel()
     val posts by userPostsViewModel.posts.observeAsState(null)
     val user by userPostsViewModel.user.observeAsState(null)
-    val context = LocalContext.current
 
     var currentUserId = ""
     if(FirebaseAuth.getInstance().currentUser != null){
@@ -119,16 +118,6 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
                         Modifier.size(100.dp),
                         contentScale = ContentScale.Crop)
                 }
-//                Image(painter = rememberAsyncImagePainter(model = user!!.downloadedUrl), contentDescription = "pfp",
-//                    modifier = Modifier
-//                        .constrainAs(pfp) {
-//                            end.linkTo(parent.end)
-//                            top.linkTo(parent.top, margin = 10.dp)
-//                        }
-//                        .size(100.dp)
-//                        .clip(CircleShape),
-//                    contentScale = ContentScale.Crop
-//                )
 
                 Text(text = "${followerList?.size} Followers", style = TextStyle(fontWeight = FontWeight.Medium, fontSize = 15.sp) ,modifier = Modifier.constrainAs(followers){
                     top.linkTo(bio.bottom, margin = 12.dp)
@@ -160,7 +149,9 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
 
                 if(followerList?.contains(currentUserId) == true){
                     ElevatedButton(onClick = {
-                        //TODO: Unfollow Functionality
+                        if(FirebaseAuth.getInstance().currentUser!=null){
+                            userPostsViewModel.unfollowUser(uid,currentUserId)
+                        }
                     },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black),
                         border = BorderStroke(2.dp, Color.Black),

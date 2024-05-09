@@ -80,6 +80,14 @@ class UserPostsViewModel: ViewModel() {
         followerRef.update("followerIds", FieldValue.arrayUnion(currentUserId))
     }
 
+    fun unfollowUser(userId: String, currentUserId: String){
+        val followingRef = firestoreDb.collection("following").document(currentUserId)
+        val followerRef = firestoreDb.collection("followers").document(userId)
+
+        followingRef.update("followingIds",FieldValue.arrayRemove(userId))
+        followerRef.update("followerIds", FieldValue.arrayRemove(currentUserId))
+    }
+
     fun getFollowers(userId: String){
         firestoreDb.collection("followers").document(userId)
             .addSnapshotListener { value, error ->
