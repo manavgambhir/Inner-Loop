@@ -3,6 +3,7 @@ package com.example.innerloop.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -33,8 +34,6 @@ fun Home(navController: NavHostController) {
     val homeViewModel:homeViewModel = viewModel()
     val postNUsers by homeViewModel.postsNUser.observeAsState(null)
 
-    val context = LocalContext.current
-
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -42,10 +41,10 @@ fun Home(navController: NavHostController) {
                     Image(
                         painter = painterResource(id = R.drawable.innerloop_ic),
                         contentDescription = "Logo",
-                        modifier = Modifier.size(45.dp)
+                        modifier = Modifier.size(55.dp).padding(top = 4.dp)
                     )
                 }
-            }, modifier = Modifier.shadow(elevation = 6.dp))
+            }, modifier = Modifier.shadow(elevation = 6.dp).height(55.dp))
         }
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {

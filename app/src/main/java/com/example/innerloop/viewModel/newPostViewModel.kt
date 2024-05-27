@@ -29,14 +29,14 @@ class newPostViewModel: ViewModel() {
     }
 
      fun saveData(postContent: String, uid:String,imageUrl: String){
-        val postData = PostModel(postContent,uid, imageUrl,System.currentTimeMillis().toString())
-        postRef.child(postRef.push().key!!).setValue(postData)
+         val pid = postRef.push().key!!
+         val postData = PostModel(postContent,uid, imageUrl,System.currentTimeMillis().toString(),pid)
+         postRef.child(pid).setValue(postData)
             .addOnSuccessListener {
                 _isPosted.postValue(true)
             }.addOnFailureListener{
                 _isPosted.postValue(false)
             }
     }
-
 
 }

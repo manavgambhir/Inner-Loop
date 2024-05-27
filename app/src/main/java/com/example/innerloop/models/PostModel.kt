@@ -4,5 +4,6 @@ data class PostModel(
     val postContent: String = "",
     val userId:String = "",
     val imageUrl: String = "",
-    val timeStamp:String = ""
+    val timeStamp:String = "",
+    val pid:String = "",
 )
