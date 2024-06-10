@@ -6,30 +6,30 @@ Inner Loop is a social networking app for microblogging, enabling users to share
 <table>
   <tr>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/14f4e263-2ef6-4445-ba9f-b08cd70b2bee" alt="TopGainersScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/c681b4df-5e47-43ac-b6fa-e4e3e43bfab1" alt="LoginScreen" width="250"/>
     </td>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/1791b898-0e20-4f1f-8ad2-37dad0a626bd" alt="TopLosersScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/65ac7af9-f9be-4e3f-8bc1-ac0b9d7e4ff3" alt="RegisterScreen" width="250"/>
     </td>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/1ae2bd9a-5f6a-413a-97c6-47b15caf4269" alt="DetailsScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/472222d8-39bf-4791-a6df-ba7109f906d6" alt="HomeScreen" width="250"/>
     </td>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/c6712304-c6ef-4f13-8ce3-6c3fd267da1e" alt="MarketScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/322f010b-ceb3-42f8-8ad9-ad6d131fcb97" alt="SearchScreen" width="250"/>
     </td>
   </tr>
   <tr>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/cd0c3dfd-78bb-4619-a4f7-dffdf3541ecc" alt="SearchScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/ec68ea4b-59d2-4dd4-8d77-16db5b8a70f8" alt="ProfileScreen" width="250"/>
     </td>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/f458bd3d-ce2d-4f32-99c8-3d87f7ffc50c" alt="StarItem" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/fea2883a-d233-4092-90de-5579cbdecd48" alt="ProfileScreen" width="250"/>
     </td>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/9c23ea84-a5a0-4847-abab-e5d371962242" alt="watchListScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/d9b55289-b365-4b40-867e-04588a6c460d" alt="ProfileScreen" width="250"/>
     </td>
     <td align="center">
-<!--       <img src="https://github.com/manavgambhir/Crypto_Hub/assets/97420824/4e26d112-de4c-49db-803f-75426636af75" alt="LightModeScreen" width="250"/> -->
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/c50c55de-1074-4759-b151-87798d0a72a8" alt="ProfileScreen" width="250"/>
     </td>
   </tr>
 </table>
