@@ -171,7 +171,7 @@ fun OtherUserProfile(navController: NavHostController, uid:String) {
                 PostItem(
                     postModel = post,
                     userModel = user!!,
-                    navController = navController,
+//                    navController = navController,
                     userId = FirebaseAuth.getInstance().currentUser!!.uid
                 )
             }

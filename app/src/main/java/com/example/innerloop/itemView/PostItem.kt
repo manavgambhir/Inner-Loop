@@ -50,7 +50,7 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun PostItem(postModel:PostModel, userModel: UserModel, navController: NavHostController, userId: String) {
+fun PostItem(postModel:PostModel, userModel: UserModel, userId: String) {
 
     val homeViewModel:homeViewModel = viewModel()
     val postNUsers by homeViewModel.postsNUser.observeAsState(null)

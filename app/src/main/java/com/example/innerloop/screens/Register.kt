@@ -2,8 +2,11 @@ package com.example.innerloop.screens
 
 
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,7 +27,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AddCircle
-import androidx.compose.material.icons.rounded.Face
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.OutlinedTextField
@@ -58,6 +60,8 @@ import coil.compose.rememberAsyncImagePainter
 import com.example.innerloop.R
 import com.example.innerloop.navigation.Routes
 import com.example.innerloop.viewModel.authViewModel
+import java.io.File
+import java.io.FileOutputStream
 
 @Composable
 fun Register(navController: NavHostController) {
@@ -134,7 +138,7 @@ fun Register(navController: NavHostController) {
                     else rememberAsyncImagePainter(model = imageUri),
                     contentDescription = "ProfilePic",
                     modifier = Modifier
-                        .size(120.dp)
+                        .size(150.dp)
                         .offset(7.dp)
                         .clip(CircleShape)
                         .background(Color.White)
@@ -153,7 +157,7 @@ fun Register(navController: NavHostController) {
                 Image(imageVector = Icons.Rounded.AddCircle , contentDescription = null, colorFilter = ColorFilter.tint(Color(0xFF0270e7)),
                     modifier = Modifier
                         .align(Alignment.Bottom)
-                        .offset((-15).dp, -5.dp)
+                        .offset((-12).dp, 0.dp)
                         .size(32.dp)
                 )
             }
@@ -216,7 +220,17 @@ fun Register(navController: NavHostController) {
                     Toast.makeText(context, "Please fill all the details", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    authViewModel.registerNewUser(email,pass,name,username,imageUri!!,bio,context)
+                    // Had to save in file coz Firebase Storage does not support android.resource Uri
+                    // android.resource://com.example.innerloop/drawable/default_profile
+                    val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.default_profile)
+                    val file = File(context.cacheDir, "default_profile.png")
+                    val outputStream = FileOutputStream(file)
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                    outputStream.close()
+                    //if image uri is null default image will be set up
+                    val uriToSave = imageUri ?:  Uri.fromFile(file)
+                    Log.d("DefPfp",uriToSave.toString())
+                    authViewModel.registerNewUser(email,pass,name,username, uriToSave,bio,context)
                 }
             },
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black),

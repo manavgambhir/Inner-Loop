@@ -146,7 +146,7 @@ fun Profile(navController: NavHostController) {
                 PostItem(
                     postModel = post,
                     userModel = user,
-                    navController = navController,
+//                    navController = navController,
                     userId = FirebaseAuth.getInstance().currentUser!!.uid
                 )
             }
