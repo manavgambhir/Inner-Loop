@@ -41,3 +41,38 @@ Inner Loop is a social networking app for microblogging, enabling users to share
 - Firebase Storage is used for efficient and scalable storage of user-generated content, including post images and profile pictures.
 - User can also view other user profiles and follow or unfollow them.
 - (UPCOMMING FEATURE) User can like other users post.
+
+# Cloning and Using the Inner Loop App
+
+You can clone the Inner Loop app repository from GitHub and set it up on your local machine for testing and development. Follow these steps to get started:
+
+## Clone the Repository
+Open your terminal or command prompt and run the following command to clone the repository:
+
+```bash
+git clone https://github.com/YourUsername/Inner-Loop.git
+```
+
+Replace YourUsername with your GitHub username.
+
+## Navigate to the Project Directory
+Change your current directory to the project folder:
+```bash
+cd Inner-Loop
+```
+
+## Install Dependencies
+Run the following command to install all the project dependencies:
+```bash
+./gradlew build
+```
+
+## Set Up Firebase
+Create a new Firebase project and Register your app with the correct android package name(Your package name is generally the applicationId in your app-level build.gradle file). </br>
+Download the google-services.json file and move it to your module (app-level) root directory.
+
+## Running the App
+Use Android Studio to open the project, or you can run the app using the command:
+```bash
+./gradlew run
+```
