@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -39,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -79,4 +81,6 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.5")
+
+    implementation(libs.generativeai)
 }

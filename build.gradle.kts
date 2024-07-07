@@ -4,3 +4,9 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     id("com.google.gms.google-services") version "4.4.1" apply false
 }
+
+buildscript {
+    dependencies {
+        classpath(libs.secrets.gradle.plugin)
+    }
+}
