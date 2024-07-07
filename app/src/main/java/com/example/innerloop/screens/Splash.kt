@@ -38,7 +38,7 @@ fun Splash(navController: NavHostController) {
         Row {
             Text(text = "Made with ")
             Icon(imageVector = Icons.Default.Favorite, contentDescription = "heart_ic",
-                modifier = Modifier.size(27.dp), tint = Color.Red)
+                modifier = Modifier.size(23.dp), tint = Color.Red)
             Text(text = " by Manav")
         }
 
