@@ -23,10 +23,10 @@ Inner Loop is a social networking app for microblogging, enabling users to share
       <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/ec68ea4b-59d2-4dd4-8d77-16db5b8a70f8" alt="ProfileScreen" width="250"/>
     </td>
     <td align="center">
-      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/fea2883a-d233-4092-90de-5579cbdecd48" alt="ProfileScreen" width="250"/>
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/f5f4070f-e73c-4602-b983-2529e2aeab4e" alt="ProfileScreen" width="250"/>
     </td>
     <td align="center">
-      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/d9b55289-b365-4b40-867e-04588a6c460d" alt="ProfileScreen" width="250"/>
+      <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/8833dd51-c100-44af-83f9-7befc986f4f5" alt="ProfileScreen" width="250"/>
     </td>
     <td align="center">
       <img src="https://github.com/manavgambhir/Inner-Loop/assets/97420824/c50c55de-1074-4759-b151-87798d0a72a8" alt="ProfileScreen" width="250"/>
