@@ -40,7 +40,7 @@ Inner Loop is a social networking app for microblogging, enabling users to share
 - Firebase Realtime Database is used to store and sync user data in real-time, enabling instant updates across devices and ensuring a smooth and responsive user experience.
 - Firebase Storage is used for efficient and scalable storage of user-generated content, including post images and profile pictures.
 - User can also view other user profiles and follow or unfollow them.
-- (UPCOMMING FEATURE) User can like other users post.
+- Users can like other users post.
 
 # Cloning and Using the Inner Loop App
 
